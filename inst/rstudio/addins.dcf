@@ -1,0 +1,192 @@
+
+Name: NewObject
+Title: Creates a new vector, matrix or data frame in the edit window
+Description: Inserts the designed object
+Binding: NewObject
+Interactive: true
+
+
+Name: FileOpen
+Title: Get the path of a file to open and insert in code
+Description: Display file dialog to choose a file and return full path using slashes
+Binding: FileOpen
+Interactive: true
+
+Name: FileImport
+Title: Import a SPSS, SAS, Stata, Systat or MiniTab file
+Description: Import a SPSS, SAS, Stata, Systat or MiniTab file
+Binding: FileImport
+Interactive: true
+
+
+Name: FileSaveAs
+Title: Display filedialog and save selected object
+Description: Save current selection as object in several formats as binary, text, csv, xlsx
+Binding: FileSaveAs
+Interactive: true
+
+Name: GetExcelRange
+Title: Import Excel range
+Description: Import a selected range in a running Excel instance
+Binding: GetExcelRange
+Interactive: true
+
+
+Name: XLView
+Title: View selected object in XL
+Description: View selected object in XL
+Binding: XLView
+Interactive: false
+
+Name: IntView
+Title: View selected object with internal viewer
+Description: View selected object with internal viewer
+Binding: IntView
+Interactive: false
+
+
+Name: Edit
+Title: Run R base function fix() on the current selection
+Description: Takes the selection (typically a data.frame) and invokes edit on it. Then the new (edited) version of the data.frame is assigned in the user's workspace.
+Binding: Edit
+Interactive: false
+
+Name: FlushToSource
+Title: Replace selection with its dput result
+Description: Replace selection with its dput result
+Binding: FlushToSource
+Interactive: true
+
+
+Name: Select
+Title: Select elements interactively
+Description: Select colours, point characters, path, names of a data.frame or factor levels based on the current selection
+Binding: Select
+Interactive: true
+
+
+
+Name: Str
+Title: Run Str() on the current selection
+Description: Run DescTools command Str() on the current selection
+Binding: Str
+Interactive: false
+
+Name: Abstract
+Title: Run Abstract() on the current selection
+Description: Run DescTools command Abstract() on the current selection
+Binding: Abstract
+Interactive: false
+
+Name: Head
+Title: Run R-command head() on the current selection
+Description: Run R-command head() on the current selection
+Binding: Head
+Interactive: false
+
+Name: Some
+Title: Run DescTools command Some() on the current selection
+Description: Run DescTools command Some() on the current selection
+Binding: Some
+Interactive: false
+
+Name: Summary
+Title: Run summary() on the current selection
+Description: Run R command summary() on the current selection
+Binding: Summary
+Interactive: false
+
+Name: Desc
+Title: Run Desc() on the current selection
+Description: Run Desc() on the current selection
+Binding: Desc
+Interactive: false
+
+Name: Example
+Title: Run R-command example on the current selection
+Description: Run R-command example() on the current selection
+Binding: Example
+Interactive: false
+
+
+
+
+Name: Info
+Title: Return basic properties of an object
+Description: Return basic properties of an object, including class, dimension and attributes
+Binding: Info
+Interactive: false
+
+Name: Unclass
+Title: Run unclass() on the current selection
+Description: Run R command unclass() on the current selection
+Binding: Unclass
+Interactive: false
+
+
+
+Name: Plot
+Title: Run plot on the current selection
+Description: Run plot on the current selection
+Binding: Plot
+Interactive: false
+
+
+Name: PlotD
+Title: Run plot(Desc()) on the current selection
+Description: Run plot(Desc()) on the current selection
+Binding: PlotD
+Interactive: false
+
+Name: SetArrow
+Title: Place an arrow in a plot
+Description: Place an arrow in a plot and insert code into source file
+Binding: SetArrow
+Interactive: true
+
+
+Name: InspectPnt
+Title: Identify Points on a Plot
+Description: Launch IdentifyA() with the current selection as argument and returns the selected points on the plot.
+Binding: InspectPnt
+Interactive: true
+
+
+
+
+
+Name: BuildModel
+Title: Run ModelDlg() on the current selection
+Description: Display dialog to compose a model formula, using variables from the data.frame which name is currently selected
+Binding: BuildModel
+Interactive: true
+
+
+
+Name: Enquote
+Title: Replace line breaks by commas, while enquoting the parts
+Description: Replace all the line breaks in the currently selected text by commas and enquote the parts
+Binding: Enquote
+Interactive: true
+
+Name: EnquoteS
+Title: Replace line breaks by commas, while enquoting the parts
+Description: Replace all the line breaks in the currently selected text by commas and (single) enquote the parts
+Binding: EnquoteS
+Interactive: true
+
+Name: EvalEnquote
+Title: Evaluate the selection, enquotes the parts and paste together
+Description: Evaluate the current selection, enquotes the parts and paste together
+Binding: EvalEnquote
+Interactive: true
+
+Name: FlipBackSlash
+Title: Replace backslashes \ by simple slashes /
+Description: Replace all backslashes in the currently selected text by simple slashes
+Binding: FlipBackSlash
+Interactive: true
+
+
+
+

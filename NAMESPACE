@@ -1,0 +1,28 @@
+
+export("Str", "Desc", "Select", "Plot", "PlotD", "Head", "BuildModel", "Edit", "NewObject",
+       "FileSaveAs" , "XLView","IntView", "FileOpen", "FlipBackSlash", "Example", "PlotPar", "PlotPch", "PlotMar",
+       "Info","FileOpenDlg", "Xplore", "dir.choose", "ColorDlg", "SelectVarDlg", "FileImportDlg", "ColPicker",
+       "SetArrow", "Enquote", "EnquoteS", "EvalEnquote", "InspectPnt", "Unclass","GetExcelRange","FlushToSource")
+
+importFrom("DescTools", "Desc", "Str", "Abstract", "Some", "Arrow", "Pal",
+           "StrTrim", "Format", "Label", "StrExtract", "StrTrunc", "IsNumeric", "SplitPath"
+           )
+importFrom("rstudioapi", "insertText","getActiveDocumentContext", "sendToConsole", "modifyRange")
+importFrom("tcltk", "tkgetSaveFile", "tclvalue")
+importFrom("utils", "fix","edit", "capture.output", "object.size", "select.list")
+importFrom("writexl", "write_xlsx")
+importFrom("manipulate", "manipulate", "picker","button","checkbox","slider")
+importFrom("stats", "smooth")
+importFrom("grDevices", "colors", "col2rgb", "dev.cur", "dev.list", "dev.new",
+           "dev.set", "rgb2hsv", "dev.off")
+importFrom("graphics", "grid", "arrows", "box", "grconvertX", "grconvertY",
+           "mtext", "par", "plot", "points", "segments", "text")
+importFrom("foreign", "read.spss", "read.dta")
+
+S3method(SelectVarDlg, data.frame)
+S3method(SelectVarDlg, default)
+S3method(SelectVarDlg, factor)
+S3method(SelectVarDlg, numeric)
+
+
+
