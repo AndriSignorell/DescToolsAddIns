@@ -10,7 +10,7 @@ Str <- function(){
 
   sel <- getActiveDocumentContext()$selection[[1]]$text
   if(sel != "") {
-    rstudioapi::sendToConsole(gettextf("Str(%s)", sel), focus = FALSE)
+    rstudioapi::sendToConsole(gettextf("DescTools::Str(%s)", sel), focus = FALSE)
   } else {
     cat("No selection!\n")
   }
@@ -32,7 +32,7 @@ Abstract <- function(){
 
   sel <- getActiveDocumentContext()$selection[[1]]$text
   if(sel != "") {
-    rstudioapi::sendToConsole(gettextf("Abstract(%s)", sel), focus = FALSE)
+    rstudioapi::sendToConsole(gettextf("DescTools::Abstract(%s)", sel), focus = FALSE)
   } else {
     cat("No selection!\n")
   }
@@ -75,7 +75,7 @@ Desc <- function(){
 
   sel <- getActiveDocumentContext()$selection[[1]]$text
   if(sel != "") {
-    rstudioapi::sendToConsole(gettextf("Desc(%s)", sel), focus = FALSE)
+    rstudioapi::sendToConsole(gettextf("DescTools::Desc(%s)", sel), focus = FALSE)
   } else {
     cat("No selection!\n")
   }
@@ -152,7 +152,7 @@ PlotD <- function(){
 
   sel <- getActiveDocumentContext()$selection[[1]]$text
   if(sel != "") {
-    rstudioapi::sendToConsole(gettextf("plot(Desc(%s))", sel), focus = FALSE)
+    rstudioapi::sendToConsole(gettextf("plot(DescTools::Desc(%s))", sel), focus = FALSE)
   } else {
     cat("No selection!\n")
   }
@@ -215,7 +215,7 @@ Some <- function(){
 
   sel <- getActiveDocumentContext()$selection[[1]]$text
   if(sel != ""){
-    rstudioapi::sendToConsole(gettextf("Some(%s)", sel), execute = TRUE, focus = FALSE)
+    rstudioapi::sendToConsole(gettextf("DescTools::Some(%s)", sel), execute = TRUE, focus = FALSE)
   } else {
     cat("No selection!\n")
   }
@@ -303,7 +303,7 @@ XLView <- function(){
 
   sel <- getActiveDocumentContext()$selection[[1]]$text
   if(sel != "") {
-    rstudioapi::sendToConsole(gettextf("XLView(%s)", sel), focus = FALSE)
+    rstudioapi::sendToConsole(gettextf("DescTools::XLView(%s)", sel), focus = FALSE)
   } else {
     cat("No selection!\n")
   }
