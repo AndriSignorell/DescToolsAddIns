@@ -12,6 +12,14 @@ Description: Display file dialog to choose a file and return full path using sla
 Binding: FileOpen
 Interactive: true
 
+
+Name: FileBrowserOpen
+Title: Opens a File Browser Window for the Selected Path
+Description: Opens a file browser window for the selected path
+Binding: FileBrowserOpen
+Interactive: true
+
+
 Name: FileImport
 Title: Import a SPSS, SAS, Stata, Systat or MiniTab file
 Description: Import a SPSS, SAS, Stata, Systat or MiniTab file
@@ -37,6 +45,37 @@ Title: View selected object in XL
 Description: View selected object in XL
 Binding: XLView
 Interactive: false
+
+
+Name: ToWrd
+Title: Send To Word
+Description: Send output of the selected object to Word
+Binding: ToWrd
+Interactive: false
+
+
+Name: ToWrdWithBookmark
+Title: Send Results of Selected Code To Word and Bookmark them
+Description: Send output of the selected object to Word and places a bookmark on the inserted text
+Binding: ToWrdWithBookmark
+Interactive: false
+
+
+Name: ToWrdPlotWithBookmark
+Title: Send Results of Selected Plot Code To Word and Bookmark it
+Description: Send output of the selected plot building code to Word and places a bookmark on the inserted plot
+Binding: ToWrdPlotWithBookmark
+Interactive: false
+
+
+Name: UpdateBookmark
+Title: Update a Bookmark in Word 
+Description: Update a Bookmark in Word with the results of the currently selected code in R
+Binding: UpdateBookmark
+Interactive: false
+
+
+
 
 Name: IntView
 Title: View selected object with internal viewer
@@ -175,6 +214,28 @@ Description: Replace all the line breaks in the currently selected text by comma
 Binding: EnquoteS
 Interactive: true
 
+
+Name: SortAsc
+Title: Sort the Selected Text (ascending)
+Description: Sorts the selected text in ascending order
+Binding: SortAsc
+Interactive: true
+
+Name: SortDesc
+Title: Sort the Selected Text (descending)
+Description: Sorts the selected text in decreasing order
+Binding: SortDesc
+Interactive: true
+
+
+Name: RemoveDuplicates
+Title: Remove Duplicates
+Description: Remove rowwise all duplicates in the currently selected text
+Binding: RemoveDuplicates
+Interactive: true
+
+
+
 Name: EvalEnquote
 Title: Evaluate the selection, enquotes the parts and paste together
 Description: Evaluate the current selection, enquotes the parts and paste together
@@ -187,6 +248,11 @@ Description: Replace all backslashes in the currently selected text by simple sl
 Binding: FlipBackSlash
 Interactive: true
 
+Name: FlipSlash
+Title: Replace slashes / by backslashes \
+Description: Replace all slashes in the currently selected text by backslashes
+Binding: FlipSlash
+Interactive: true
 
 
 

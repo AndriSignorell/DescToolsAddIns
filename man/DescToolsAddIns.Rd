@@ -14,6 +14,7 @@
 \alias{IntView}
 \alias{FileOpen}
 \alias{FlipBackSlash}
+\alias{FlipSlash}
 \alias{SetArrow}
 \alias{Enquote}
 \alias{EnquoteS}
@@ -27,6 +28,13 @@
 \alias{Class}
 \alias{Info}
 \alias{FlushToSource}
+\alias{ToWrd}
+\alias{ToWrdWithBookmark}
+\alias{UpdateBookmark}
+\alias{FileBrowserOpen}
+\alias{SortAsc}
+\alias{SortDesc}
+\alias{RemoveDuplicates}
 
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{Some Functions to be Used as Shortcuts in 'RStudio'
@@ -43,6 +51,7 @@ Assigning shortcuts to these add-ins saves you quite a few keystrokes and brings
 \usage{
 NewObject()
 FileOpen()
+FileBrowserOpen()
 FileImport()
 FileSaveAs()
 GetExcelRange(env = .GlobalEnv)
@@ -72,8 +81,12 @@ BuildModel()
 
 Enquote()
 EnquoteS()
+RemoveDuplicates()
+SortAsc()
+SortDesc()
 EvalEnquote()
 FlipBackSlash()
+FlipSlash()
 }
 \arguments{
 \item{env}{Environment for GetExcelRange to write the data. GlobalEnv is default.}
@@ -83,7 +96,8 @@ The following add-ins are available:
 \itemize{
     \item \code{NewObject}:  \cr starts the good old internal editor and allows to enter values. In dependence of the initial selection in the code panel different objects will be returned. If the selection was \code{m} the code for a matrix will be created, if the selection is \code{d} then the code for a data.frame will be returned and a c will be interpreted as vector. Default is \code{m}. Note that column names can be defined within the editor, but not rownames (don't ask me why ...).
     \item \code{FileOpen}:  \cr get the path of a file to open and insert in code. (See also: \code{Select()})
-    \item \code{FileImport}:  \cr display the import file dialog for importing SAS, SPSS, Stata, Systat and MiniTab files. (See \code{\link{FileImportDlg}()})
+ \item \code{FileBrowserOpen}:  \cr get a selected path and opens the systems filebrowser with the according directory.
+ \item \code{FileImport}:  \cr display the import file dialog for importing SAS, SPSS, Stata, Systat and MiniTab files. (See \code{\link{FileImportDlg}()})
     \item \code{FileSaveAs}:  \cr display a file dialog, get the desired path and filename and save the selected object in the given place.
         Several file types are supported csv/xlsx for data.frames, text/binary for other objects.
     \item \code{GetXLRange}:  \cr run DescTools command \code{\link[DescTools]{XLGetRange}()} by taking the current selection as name for the imported data and replace the current selection by the used code.
@@ -92,7 +106,7 @@ The following add-ins are available:
     \item \code{IntView}:  \cr view selected object with internal viewer (here again: only data.frames)
     \item \code{Edit}:  \cr run R-command \code{\link{fix}()} on the current selection. This is nice for editing data frames interactively.
     \item \code{FlushToSource}: \cr run \code{dput} on the current selection and replace the selection with the result.
-    \item \code{Select}:  \cr select or pick things interactively. This function as well evaluates the current selection. If the selection corresponds to \code{pch} a dialog for selecting point characters will be displayed. If it's \code{col} the \code{\link{ColPicker}()} dialog will be displayed. If it's any of \code{path}, \code{fn}, \code{file} the \code{FileOpen()} dialog will be displayed. In all other case the \code{\link[DescTools]{SelectVarDlg}()} on the current selection will be run. This can be used to select variablenames of a \code{data.frame} by mouse click or the levels of a factor (all depending on the class of the selected object). The variable names will be returned as string, enquoted and separated by a comma.
+    \item \code{Select}:  \cr select or pick things interactively. This function as well evaluates the current selection. If the selection corresponds to \code{pch} a dialog for selecting point characters will be displayed. If it's \code{col} the \code{\link{ColPicker}()} dialog will be displayed. If it's any of \code{path}, \code{fn}, \code{file} the \code{FileOpen()} dialog will be displayed. In all other case the \code{\link{SelectVarDlg}()} on the current selection will be run. This can be used to select variablenames of a \code{data.frame} by mouse click or the levels of a factor (all depending on the class of the selected object). The variable names will be returned as string, enquoted and separated by a comma.
 
     \item \code{Str}:  \cr run DescTools command \code{\link[DescTools]{Str}()} on the current selection;
     \item \code{Abstract}:  \cr run DescTools command \code{\link[DescTools]{Abstract}()} (a less technical description than \code{str()}, meant for using with data.frames) on the current selection
@@ -113,9 +127,12 @@ The following add-ins are available:
 
     \item \code{Enquote}:  \cr split the selected text in the source panel using line breaks as separators, enquote the sections and paste them separated by comma.
     \item \code{EnquoteS}:  \cr does the same as \code{Enquote()} but uses single quotation marks.
+    \item \code{RemoveDuplicates}:  \cr remove all the duplicates (by row) of the selected text.
+    \item \code{SortAsc}, \code{SortDesc}:  \cr sorts the selected text by row in ascending, resp. descending order.
+    
     \item \code{EvalEnquote}:  \cr evaluates the selection before enquoting the parts and paste them separated by comma. This can be used to enquote factors.
      \item \code{FlipBackSlash}: \cr Handling backslashes in pathnames can be really annoying on Windows. This function replaces all backslashes in the selected text by simple slashes. \cr It's cool to set this command to the keyboard shortcut: \code{Ctrl+Shift+/}
-
+     \item \code{FlipSlash}: \cr inverse function to \code{FlipBackSlash}.
   }
 
 As soon as the package is loaded once, the AddIns will be listed in RStudios AddIns listbox:\cr\cr

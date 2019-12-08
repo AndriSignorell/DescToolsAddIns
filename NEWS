@@ -1,5 +1,50 @@
 
-DescToolsAddIns 1.3 (2019-10-07)
+
+DescToolsAddIns 1.6 (2019-12-27)
+---------------------------------
+
+NEW FUNCTIONS ADDED:
+   * RemoveDuplicates() has been added and does what it says.
+   * SortAsc() and SortDesc() sorts the selected text rowwise.
+
+UPDATED FUNCTIONS:
+   * 
+
+BUGFIXES:
+   * DescTools functions will be executed also in cases library has not been loaded
+     before.
+
+
+
+
+DescToolsAddIns 1.5 (2019-10-27)
+---------------------------------
+
+NEW FUNCTIONS ADDED:
+  * ToWrd() sends the output of the selection directly to the current Word
+    instance.
+  * ToWrdWithBookmark() sends the output of the selection directly to the current
+    Word instance and tags the output with a bookmark.
+  * ToWrdPlotWithBookmark() sends the output of a plot code directly to the current
+    Word instance and tags the output with a bookmark.
+  * UpdateBookmark() evaluates the selection and updates a bookmarked output 
+    in Word.
+  * FileBrowserOpen() opens a file browser window with the selection as current 
+    directory.
+ 
+
+
+
+DescToolsAddIns 1.4 (2019-09-26)
+---------------------------------
+
+BUGFIXES:
+   * Fixing broken link in help text causing build error on CRAN.
+
+
+
+
+DescToolsAddIns 1.3 (2019-07-15)
 ---------------------------------
 
 NEW FUNCTIONS ADDED:
@@ -8,12 +53,6 @@ NEW FUNCTIONS ADDED:
    * New functions taken over from DescTools: ModelDlg(), FileOpenDlg(), Xplore(),
      dir.choose(), ColorDlg(), SelectVarDlg(), ImportFileDlg(), PlotPar(), PlotPch(),
      PlotMar()
-
-UPDATED FUNCTIONS:
-   *
-
-BUGFIXES:
-   *
 
 DEPRECATED:
    * Save() has been replaced by FileSaveAs().

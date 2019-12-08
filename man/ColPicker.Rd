@@ -4,7 +4,7 @@
 \title{Plot All Named R Colors
 %%  ~~function to do ... ~~
 }
-\description{\code{ColPicker()} plots the R-colors in a dense manner and allows to collect some colors by using a locator. This can be helpful when some colors should be put together to a palette.
+\description{\code{ColPicker()} plots the R-colors in a dense manner and allows to collect  colors by using a locator. This can be helpful when some colors should be put together to a palette.
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
 }
 \usage{
