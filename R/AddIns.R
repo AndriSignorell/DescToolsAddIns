@@ -463,10 +463,16 @@ EvalEnquote <- function(){
 
 SortAsc <- function(){
   
+  rng <- getActiveDocumentContext()
   txt <- getActiveDocumentContext()$selection[[1]]$text
+
   if(txt != "") {
-    txt <- paste(sort(strsplit(txt, split="\n")[[1]]), collapse="\n")
-    rstudioapi::modifyRange(txt)
+    rep_txt <- paste(sort(strsplit(txt, split="\n")[[1]]), collapse="\n")
+    if(length(grep("\\n$", txt))!=0)
+      rep_txt <- paste0(rep_txt, "\n")
+    
+    rstudioapi::modifyRange(rep_txt)
+    rstudioapi::setSelectionRanges(rng$selection[[1]]$range)
     
   } else {
     cat("No selection!\n")
@@ -477,11 +483,15 @@ SortAsc <- function(){
 
 
 SortDesc <- function(){
-  
+  rng <- getActiveDocumentContext()
   txt <- getActiveDocumentContext()$selection[[1]]$text
+  
   if(txt != "") {
-    txt <- paste(sort(strsplit(txt, split="\n")[[1]], decreasing = TRUE), collapse="\n")
-    rstudioapi::modifyRange(txt)
+    rep_txt <- paste(sort(strsplit(txt, split="\n")[[1]], decreasing = TRUE), collapse="\n")
+    if(length(grep("\\n$", txt))!=0)
+      rep_txt <- paste0(rep_txt, "\n")
+    rstudioapi::modifyRange(rep_txt)
+    rstudioapi::setSelectionRanges(rng$selection[[1]]$range)
     
   } else {
     cat("No selection!\n")
@@ -494,13 +504,23 @@ SortDesc <- function(){
 
 RemoveDuplicates <- function () {
   
+  rng <- getActiveDocumentContext()
   txt <- getActiveDocumentContext()$selection[[1]]$text
   if (txt != "") {
     
     txt <- strsplit(txt, split = "\n")[[1]]
     u <- unique(txt)
     utxt <- paste(u, collapse = "\n")
-    rstudioapi::modifyRange(paste0(utxt, "\n"))
+    # add the last cr if the original already had it
+    if(length(grep("\\n$", txt))!=0)
+      utxt <- paste0(utxt, "\n")
+    
+    rstudioapi::modifyRange(utxt)
+    
+    sel <- rng$selection[[1]]$range
+    sel$end[1] <- sel$end[1] - (length(txt) - length(u))
+    
+    rstudioapi::setSelectionRanges(sel)
     
     note <- gettextf("\033[36m\nNote: ------\n  %s duplicates have been found and removed. %s values remain.\n\n\033[39m", 
                     length(txt) - length(u), length(u)) 
@@ -658,7 +678,7 @@ ToWrdPlotWithBookmark <- function(){
   
   sel <- getActiveDocumentContext()$selection[[1]]$text
   if(sel != "") {
-    bm <- eval(parse(text=gettextf("bm <- DescTools::ToWrdPlot({%s})", sel)))
+    bm <- eval(parse(text=gettextf("bm <- DescTools::ToWrdPlot(%s)", sQuote(gettextf("{%s}", sel)))))
     rstudioapi::modifyRange(gettextf("## BookmarkName: %s (width=15)\n{\n%s}\n", 
                                      bm$bookmark$name(), sel))
     
@@ -696,7 +716,7 @@ UpdateBookmark <- function(){
     bmtype <- substr(bm, 1, 3)
     
     # get the commands between the brackets
-    code <- regmatches(sel, gregexpr("(?s)(?<=\\{).*?(?=\\})", sel, perl=TRUE))[[1]]
+    code <- regmatches(sel, gregexpr("(?s)(?<=\\{).*(?=\\})", sel, perl=TRUE))[[1]]
     
     if(!is.null(DescTools::WrdBookmark(bookmark = bm))){
       
@@ -705,10 +725,10 @@ UpdateBookmark <- function(){
       wrd[["Selection"]]$delete()
       
       if(bmtype=="bmt") {         # text bookmark
-        eval(parse(text=gettextf("DescTools::ToWrdB({%s}, bookmark='%s' %s)", code, bm, args)))
+        eval(parse(text=gettextf('DescTools::ToWrdB({%s}, bookmark="%s" %s)', code, bm, args)))
         
       } else if(bmtype=="bmp") {  # plot bookmark
-        eval(parse(text=gettextf("DescTools::ToWrdPlot({%s}, bookmark='%s' %s)", code, bm, args)))
+        eval(parse(text=gettextf("DescTools::ToWrdPlot(%s, bookmark='%s' %s)", sQuote(gettextf("{%s}", code)), bm, args)))
         
       } else {
         warning("unknown bookmark type")

@@ -11,8 +11,8 @@ UPDATED FUNCTIONS:
    * 
 
 BUGFIXES:
-   * DescTools functions will be executed also in cases library has not been loaded
-     before.
+   * DescTools functions will be executed also in cases when the 
+     package has not been loaded before.
 
 
 
@@ -23,14 +23,14 @@ DescToolsAddIns 1.5 (2019-10-27)
 NEW FUNCTIONS ADDED:
   * ToWrd() sends the output of the selection directly to the current Word
     instance.
-  * ToWrdWithBookmark() sends the output of the selection directly to the current
-    Word instance and tags the output with a bookmark.
-  * ToWrdPlotWithBookmark() sends the output of a plot code directly to the current
-    Word instance and tags the output with a bookmark.
+  * ToWrdWithBookmark() sends the output of the selection directly to the
+    current Word instance and tags the output with a bookmark.
+  * ToWrdPlotWithBookmark() sends the output of a plot code directly to the
+    current Word instance and tags the output with a bookmark.
   * UpdateBookmark() evaluates the selection and updates a bookmarked output 
     in Word.
-  * FileBrowserOpen() opens a file browser window with the selection as current 
-    directory.
+  * FileBrowserOpen() opens a file browser window with the selection 
+    as current directory.
  
 
 
