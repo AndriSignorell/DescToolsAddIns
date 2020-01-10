@@ -3,11 +3,11 @@ export("Str", "Desc", "Select", "Plot", "PlotD", "Head", "BuildModel", "Edit", "
        "FileSaveAs" , "XLView","IntView", "FileOpen", "FileBrowserOpen", "FlipBackSlash", "FlipSlash","Example", "PlotPar", "PlotPch", "PlotMar",
        "Info","FileOpenDlg", "Xplore", "dir.choose", "ColorDlg", "SelectVarDlg", "FileImportDlg", "ColPicker",
        "SetArrow", "Enquote", "EnquoteS", "EvalEnquote", "InspectPnt", "Unclass","GetExcelRange","FlushToSource", "RemoveDuplicates",
-       "SortAsc", "SortDesc")
+       "SortAsc", "SortDesc", "CreateBookmark")
 
 importFrom("DescTools", "Desc", "Str", "Abstract", "Some", "Arrow", "Pal",
            "StrTrim", "Format", "Label", "StrExtract", "StrTrunc", "IsNumeric", "SplitPath",
-           "ToWrdB", "WrdGoto", "DescToolsOptions","WrdBookmark")
+           "ToWrdB", "WrdGoto", "DescToolsOptions","WrdBookmark", "WrdInsertBookmark")
 
 importFrom("rstudioapi", "insertText","getActiveDocumentContext", "sendToConsole", "modifyRange")
 importFrom("tcltk", "tkgetSaveFile", "tclvalue")

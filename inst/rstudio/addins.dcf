@@ -75,6 +75,12 @@ Binding: UpdateBookmark
 Interactive: false
 
 
+Name: CreateBookmark
+Title:  Create a Bookmark in Word
+Description: Takes the current selection and creates a bookmark with it as name.
+Binding: CreateBookmark
+Interactive: false
+
 
 
 Name: IntView

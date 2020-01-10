@@ -31,6 +31,7 @@
 \alias{ToWrd}
 \alias{ToWrdWithBookmark}
 \alias{UpdateBookmark}
+\alias{CreateBookmark}
 \alias{FileBrowserOpen}
 \alias{SortAsc}
 \alias{SortDesc}

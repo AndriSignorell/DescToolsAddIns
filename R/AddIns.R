@@ -362,7 +362,7 @@ ToWrd <- function(){
 IntView <- function(){
   sel <- getActiveDocumentContext()$selection[[1]]$text
   if(sel != "") {
-    rstudioapi::sendToConsole(gettextf("DescTools::View(%s)", sel), focus = FALSE)
+    rstudioapi::sendToConsole(gettextf("View(%s)", sel), focus = FALSE)
   } else {
     cat("No selection!\n")
   }
@@ -411,11 +411,22 @@ SetArrow <- function(){
 
 
 Enquote <- function(){
-
+  
+  rng <- getActiveDocumentContext()
   txt <- getActiveDocumentContext()$selection[[1]]$text
   if(txt != "") {
     txt <- paste(shQuote(strsplit(txt, split="\n")[[1]]), collapse=",")
+    
+    # store selection
+    sel <- rng$selection[[1]]$range
+    
+    # insert the text
     rstudioapi::modifyRange(txt)
+    
+    # select inserted text
+    nsel <- getActiveDocumentContext()$selection[[1]]$range
+    sel$end <- nsel$start
+    rstudioapi::setSelectionRanges(sel)
 
   } else {
     cat("No selection!\n")
@@ -428,11 +439,22 @@ Enquote <- function(){
 
 EnquoteS <- function(){
 
+  rng <- getActiveDocumentContext()
   txt <- getActiveDocumentContext()$selection[[1]]$text
   if(txt != "") {
     txt <- paste(sQuote(strsplit(txt, split="\n")[[1]]), collapse=",")
+
+    # store selection
+    sel <- rng$selection[[1]]$range
+    
+    # insert the text
     rstudioapi::modifyRange(txt)
 
+    # select inserted text
+    nsel <- getActiveDocumentContext()$selection[[1]]$range
+    sel$end <- nsel$start
+    rstudioapi::setSelectionRanges(sel)
+    
   } else {
     cat("No selection!\n")
   }
@@ -621,7 +643,9 @@ InspectPnt <- function(){
 GetExcelRange <- function(env=.GlobalEnv){
 
   requireNamespace("DescTools")
-
+  
+  # we need to declare the variable here to avoid the barking of the check
+  rng <- data.frame()   
   eval(parse(text="rng <- DescTools::XLGetRange()"))
   
   txt <- getActiveDocumentContext()$selection[[1]]$text
@@ -687,6 +711,20 @@ ToWrdPlotWithBookmark <- function(){
   }
 }
 
+
+
+CreateBookmark <- function(){
+  
+  requireNamespace("DescTools")
+  
+  sel <- getActiveDocumentContext()$selection[[1]]$text
+  if(sel != "") {
+    if(sel=="\n") sel <- "'\n'"
+    rstudioapi::sendToConsole(gettextf("DescTools::WrdInsertBookmark(name='%s')", sel), focus = FALSE)
+  } else {
+    cat("No selection!\n")
+  }
+}
 
 
 

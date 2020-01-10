@@ -1,14 +1,17 @@
 
 
-DescToolsAddIns 1.6 (2019-12-27)
+DescToolsAddIns 1.6 (2020-01-10)
 ---------------------------------
 
 NEW FUNCTIONS ADDED:
    * RemoveDuplicates() has been added and does what it says.
    * SortAsc() and SortDesc() sorts the selected text rowwise.
+   * CreateBookmark will take the selected text and use it as name
+     for a new bookmark to be inserted in the cursor position of 
+     a running Word instance.
 
 UPDATED FUNCTIONS:
-   * 
+   * Enquote() and EnquoteS() will retain the selection.
 
 BUGFIXES:
    * DescTools functions will be executed also in cases when the 
