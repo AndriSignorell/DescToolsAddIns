@@ -40,6 +40,13 @@ Binding: GetExcelRange
 Interactive: true
 
 
+Name: GetExcelRangeH
+Title: Import Excel range
+Description: Import a selected range in a running Excel instance, using a header
+Binding: GetExcelRangeH
+Interactive: true
+
+
 Name: XLView
 Title: View selected object in XL
 Description: View selected object in XL
@@ -115,6 +122,12 @@ Name: Str
 Title: Run Str() on the current selection
 Description: Run DescTools command Str() on the current selection
 Binding: Str
+Interactive: false
+
+Name: Str1
+Title: Run Str() on the current selection (1st level)
+Description: Run DescTools command Str() on the current selection and show only the 1 level
+Binding: Str1
 Interactive: false
 
 Name: Abstract
@@ -233,6 +246,12 @@ Description: Sorts the selected text in decreasing order
 Binding: SortDesc
 Interactive: true
 
+Name: Shuffle
+Title: Shuffle the Selected Text
+Description: Merges the selected lines in a random order
+Binding: Shuffle
+Interactive: true
+
 
 Name: RemoveDuplicates
 Title: Remove Duplicates
@@ -250,15 +269,10 @@ Interactive: true
 
 Name: FlipBackSlash
 Title: Replace backslashes \ by simple slashes /
-Description: Replace all backslashes in the currently selected text by simple slashes
+Description: Replace all backslashes in the currently selected text by simple slashes. If there are only slashes they'll be replaced by backslashes.
 Binding: FlipBackSlash
 Interactive: true
 
-Name: FlipSlash
-Title: Replace slashes / by backslashes \
-Description: Replace all slashes in the currently selected text by backslashes
-Binding: FlipSlash
-Interactive: true
 
 
 

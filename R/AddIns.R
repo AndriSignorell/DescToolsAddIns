@@ -16,6 +16,18 @@ Str <- function(){
   }
 }
 
+Str1 <- function(){
+  
+  requireNamespace("DescTools")
+  
+  sel <- getActiveDocumentContext()$selection[[1]]$text
+  if(sel != "") {
+    rstudioapi::sendToConsole(gettextf("DescTools::Str(%s, max.level=1)", sel), focus = FALSE)
+  } else {
+    cat("No selection!\n")
+  }
+}
+
 Example <- function(){
   sel <- getActiveDocumentContext()$selection[[1]]$text
   if(sel != "") {
@@ -85,26 +97,40 @@ Desc <- function(){
 
 Select <- function(){
 
+  selkey <- getOption("selkey", default=list(file=c("fn","file","filename"),
+                                             dir=c("path","dir", "pathname"),
+                                             col=c("color", "col"),
+                                             pch=c("pch"), locate=c("loc","xy")))
+  
   sel <- getActiveDocumentContext()$selection[[1]]$text
   if(sel != "") {
-    if(sel == "pch") {
+    if(sel %in% selkey$pch) {
       if(!exists("pch"))
         PlotPch(newwin = TRUE)
-    } else if(sel=="col"){
+    } else if(sel %in% selkey$col){
         txt <- eval(parse(text="ColPicker(newwin=TRUE)"))
         dev.off()
         rstudioapi::insertText(gettextf("col=c(%s)", paste(shQuote(txt), collapse=", ")))
 
-    } else if(sel %in% c("fn", "file")) {
+    } else if(sel %in% selkey$file) {
       txt <- eval(parse(text="FileOpenDlg(fmt='%path%%fname%.%ext%')"))
       if(txt != "")
         rstudioapi::insertText(gettextf("%s=%s", sel, shQuote(txt)))
 
-    } else if(sel %in% c("path","dir")) {
+    } else if(sel %in% selkey$dir) {
       txt <- eval(parse(text="dir.choose()"))
       if(txt != "")
         rstudioapi::insertText(gettextf("%s=%s", sel, shQuote(txt)))
 
+    } else if(sel %in% selkey$locate) {
+      xy <- eval(parse(text="locator()"))
+      if(!is.null(xy)){
+        txt <- gettextf("%s <- list(\n  x = c(%s),\n  y = c(%s),\n  xlab = '$x', ylab = '$y')", 
+                        sel, paste(xy$x, collapse=", "), paste(xy$y, collapse=", "))
+
+        .InsertSelectedText(txt)
+      }
+      
     } else {
       if(sel != ""){
         txt <- eval(parse(text=gettextf("SelectVarDlg(%s)", sel)))
@@ -116,6 +142,27 @@ Select <- function(){
   }
 
 }
+
+
+
+.InsertSelectedText <- function(txt){
+  
+  rng <- getActiveDocumentContext()
+  
+  # store selection
+  sel <- rng$selection[[1]]$range
+  
+  # insert the text
+  rstudioapi::modifyRange(txt)
+  
+  # select inserted text
+  nsel <- getActiveDocumentContext()$selection[[1]]$range
+  sel$end <- nsel$start
+  rstudioapi::setSelectionRanges(sel)
+  
+}
+
+
 
 
 BuildModel <- function(){
@@ -371,29 +418,49 @@ IntView <- function(){
 
 
 FlipBackSlash <- function() {
-  txt <- getActiveDocumentContext()$selection[[1]]$text
-  if(txt != "") {
-    txt <- gsub("\\\\", "/", txt)
-    # replace double // by /
-    txt <- gsub("/+", "/", txt)
-    rstudioapi::modifyRange(txt)
-  } else {
-    cat("No selection!\n")
-  }
-
-}
-
-
-FlipSlash <- function() {
-  txt <- getActiveDocumentContext()$selection[[1]]$text
-  if(txt != "") {
-    txt <- gsub("/", "\\\\", txt)
-    rstudioapi::modifyRange(txt)
-  } else {
-    cat("No selection!\n")
-  }
   
+  flip <- function(txt){
+    txt <- gsub("\\\\", "/", txt)
+    
+    if(getOption("ReplaceDoubleSlash", default = FALSE))
+      # replace double // by /
+      txt <- gsub("/+", "/", txt)
+    return(txt)
+  }
+
+  flop <- function(txt){
+    gsub("/", "\\\\", txt)
+  }  
+  
+  rng <- getActiveDocumentContext()
+  txt <- getActiveDocumentContext()$selection[[1]]$text
+  
+  if(txt != "") {
+    if(!grepl("\\\\", txt) & grepl("/", txt))
+      txt <- flop(txt)
+    else 
+      txt <- flip(txt)
+    
+    rstudioapi::modifyRange(txt)
+    rstudioapi::setSelectionRanges(rng$selection[[1]]$range)
+    
+  } else {
+    cat("No selection!\n")
+  }
+
 }
+
+
+# FlipSlash <- function() {
+#   txt <- getActiveDocumentContext()$selection[[1]]$text
+#   if(txt != "") {
+#     txt <- gsub("/", "\\\\", txt)
+#     rstudioapi::modifyRange(txt)
+#   } else {
+#     cat("No selection!\n")
+#   }
+#   
+# }
 
 
 
@@ -523,6 +590,28 @@ SortDesc <- function(){
 }
 
 
+Shuffle <- function(){
+  
+  rng <- getActiveDocumentContext()
+  txt <- getActiveDocumentContext()$selection[[1]]$text
+  
+  if(txt != "") {
+    rep_txt <- paste(sample(strsplit(txt, split="\n")[[1]]), collapse="\n")
+    if(length(grep("\\n$", txt))!=0)
+      rep_txt <- paste0(rep_txt, "\n")
+    
+    rstudioapi::modifyRange(rep_txt)
+    rstudioapi::setSelectionRanges(rng$selection[[1]]$range)
+    
+  } else {
+    cat("No selection!\n")
+  }
+  
+  
+}
+
+
+
 
 RemoveDuplicates <- function () {
   
@@ -640,13 +729,13 @@ InspectPnt <- function(){
 
 
 
-GetExcelRange <- function(env=.GlobalEnv){
+GetExcelRange <- function(env=.GlobalEnv, header=FALSE){
 
   requireNamespace("DescTools")
   
   # we need to declare the variable here to avoid the barking of the check
   rng <- data.frame()   
-  eval(parse(text="rng <- DescTools::XLGetRange()"))
+  eval(parse(text=gettextf("rng <- DescTools::XLGetRange(header=%s)", header)))
   
   txt <- getActiveDocumentContext()$selection[[1]]$text
   if(txt != "") {
@@ -663,6 +752,13 @@ GetExcelRange <- function(env=.GlobalEnv){
   print(rng)
 
 }
+
+
+
+GetExcelRangeH <- function(env=.GlobalEnv){
+  GetExcelRange(header=TRUE)
+}
+
 
 
 

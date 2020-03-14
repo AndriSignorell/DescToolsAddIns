@@ -1,5 +1,39 @@
 
 
+DescToolsAddIns 1.8 (2020-06-08)
+---------------------------------
+
+NEW FUNCTIONS ADDED:
+   * 
+
+UPDATED FUNCTIONS:
+   * 
+
+DEPRECATED:
+   * 
+
+
+
+DescToolsAddIns 1.7 (2020-03-08)
+---------------------------------
+
+NEW FUNCTIONS ADDED:
+   * Shuffle() merges the selected lines in a random order.
+   * GetExcelRangeH() imports the data from Excel using a header.
+
+UPDATED FUNCTIONS:
+   * ModelDlg() gets some brushups.
+   * Selecting with Select() xy or loc will start the locator and replace the 
+     selection with the coordinates. 
+
+DEPRECATED:
+   * FlipSlash() has been removed. FlipBackSlash() will now flip-flop between 
+     slashes and backslashes. The option "ReplaceDoubleSlash = TRUE/FALSE" can
+     be used to control the replacement to either replace double slashes by 
+     simple ones or not.
+
+
+
 DescToolsAddIns 1.6 (2020-01-10)
 ---------------------------------
 

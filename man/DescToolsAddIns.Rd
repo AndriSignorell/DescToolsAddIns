@@ -1,5 +1,6 @@
 \name{RStudio AddIns}
 \alias{Str}
+\alias{Str1}
 \alias{Summary}
 \alias{Abstract}
 \alias{Head}
@@ -14,7 +15,6 @@
 \alias{IntView}
 \alias{FileOpen}
 \alias{FlipBackSlash}
-\alias{FlipSlash}
 \alias{SetArrow}
 \alias{Enquote}
 \alias{EnquoteS}
@@ -25,6 +25,7 @@
 \alias{InspectPnt}
 \alias{Unclass}
 \alias{GetExcelRange}
+\alias{GetExcelRangeH}
 \alias{Class}
 \alias{Info}
 \alias{FlushToSource}
@@ -35,6 +36,7 @@
 \alias{FileBrowserOpen}
 \alias{SortAsc}
 \alias{SortDesc}
+\alias{Shuffle}
 \alias{RemoveDuplicates}
 
 %- Also NEED an '\alias' for EACH other topic documented here.
@@ -55,7 +57,8 @@ FileOpen()
 FileBrowserOpen()
 FileImport()
 FileSaveAs()
-GetExcelRange(env = .GlobalEnv)
+GetExcelRange(env = .GlobalEnv, header = FALSE)
+GetExcelRangeH(env = .GlobalEnv)
 XLView()
 IntView()
 
@@ -64,6 +67,7 @@ FlushToSource()
 Select()
 
 Str()
+Str1()
 Abstract()
 Head()
 Some()
@@ -85,12 +89,13 @@ EnquoteS()
 RemoveDuplicates()
 SortAsc()
 SortDesc()
+Shuffle()
 EvalEnquote()
 FlipBackSlash()
-FlipSlash()
 }
 \arguments{
 \item{env}{Environment for GetExcelRange to write the data. GlobalEnv is default.}
+\item{header}{logical determining if the import from XL should use a header or not}
 }
 \details{
 The following add-ins are available:
@@ -109,7 +114,7 @@ The following add-ins are available:
     \item \code{FlushToSource}: \cr run \code{dput} on the current selection and replace the selection with the result.
     \item \code{Select}:  \cr select or pick things interactively. This function as well evaluates the current selection. If the selection corresponds to \code{pch} a dialog for selecting point characters will be displayed. If it's \code{col} the \code{\link{ColPicker}()} dialog will be displayed. If it's any of \code{path}, \code{fn}, \code{file} the \code{FileOpen()} dialog will be displayed. In all other case the \code{\link{SelectVarDlg}()} on the current selection will be run. This can be used to select variablenames of a \code{data.frame} by mouse click or the levels of a factor (all depending on the class of the selected object). The variable names will be returned as string, enquoted and separated by a comma.
 
-    \item \code{Str}:  \cr run DescTools command \code{\link[DescTools]{Str}()} on the current selection;
+    \item \code{Str},  \code{Str1}:  \cr run DescTools command \code{\link[DescTools]{Str}()} on the current selection, \code{Str1()} shows only the first level ;
     \item \code{Abstract}:  \cr run DescTools command \code{\link[DescTools]{Abstract}()} (a less technical description than \code{str()}, meant for using with data.frames) on the current selection
     \item \code{Head}:  \cr run R-command \code{\link{head}()} on the current selection
     \item \code{Some}:  \cr run DescTools command \code{\link[DescTools]{Some}()} on the current selection
@@ -126,14 +131,13 @@ The following add-ins are available:
 
    \item \code{BuildModel}:  \cr display dialog for building up a model formula interactively by point and click. (See \code{\link{ModelDlg}()})
 
-    \item \code{Enquote}:  \cr split the selected text in the source panel using line breaks as separators, enquote the sections and paste them separated by comma.
-    \item \code{EnquoteS}:  \cr does the same as \code{Enquote()} but uses single quotation marks.
+    \item \code{Enquote}, \code{EnquoteS}:  \cr split the selected text in the source panel using line breaks as separators, enquote the sections using either double or single quotation marks, and paste them separated by comma.
     \item \code{RemoveDuplicates}:  \cr remove all the duplicates (by row) of the selected text.
-    \item \code{SortAsc}, \code{SortDesc}:  \cr sorts the selected text by row in ascending, resp. descending order.
+    \item \code{SortAsc}, \code{SortDesc}, \code{Shuffle}:  \cr sorts the selected text by row in ascending, descending, resp. random order.
     
     \item \code{EvalEnquote}:  \cr evaluates the selection before enquoting the parts and paste them separated by comma. This can be used to enquote factors.
-     \item \code{FlipBackSlash}: \cr Handling backslashes in pathnames can be really annoying on Windows. This function replaces all backslashes in the selected text by simple slashes. \cr It's cool to set this command to the keyboard shortcut: \code{Ctrl+Shift+/}
-     \item \code{FlipSlash}: \cr inverse function to \code{FlipBackSlash}.
+    
+    \item \code{FlipBackSlash}: \cr Handling backslashes in pathnames can be really annoying on Windows. This function replaces all backslashes in the selected text by simple slashes. The option \code{ReplaceDoubleSlash} controls whether double slashes should be replaced by simple ones.\cr It's cool to set this command to the keyboard shortcut: \code{Ctrl+Shift+/}
   }
 
 As soon as the package is loaded once, the AddIns will be listed in RStudios AddIns listbox:\cr\cr

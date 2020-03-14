@@ -140,7 +140,7 @@ ModelDlg <- function(x, ...){
     for (i in (n:0)) tcltk::tkdelete(tlist.var, i)
   }
 
-  .AddVar <- function(sep, pack = NULL) {
+  .AddVar <- function(sep, pack = NULL, connect="+") {
 
     var.name <- as.numeric(tcltk::tkcurselection(tlist.var))
     lst <- .GetVarName(as.character(tcltk::tkget(tlist.var, 0, "end")))
@@ -158,7 +158,7 @@ ModelDlg <- function(x, ...){
         vn <- DescTools::StrTrim(gettextf(pack, lst[var.name + 1]))
 
       tcltk::tkinsert(tfModx, "insert",
-                      StrTrim(paste(ifelse(txt=="", "", "+"), paste(vn, collapse=sep), ""), method="left")
+                      StrTrim(paste(ifelse(txt=="", "", connect), paste(vn, collapse=sep), ""), method="left")
                       , "notwrapped")
     }
   }
@@ -167,7 +167,10 @@ ModelDlg <- function(x, ...){
   .BtnAddMult <- function() .AddVar(" * ")
   .BtnAddInt <- function() .AddVar(" : ")
   .BtnAddPoly <- function() .AddVar(sep=" + ", pack="poly(%s, 2)")
-
+  .BtnAddMin <- function() .AddVar(" - ", connect="-")
+  # .BtnAddPipe <- function() .AddVar(" | ")
+  .BtnAddI <- function() .AddVar(sep=" + ", pack="I(%s)")
+  
 
 
   imgAsc <-  tcltk::tclVar()
@@ -258,13 +261,13 @@ ModelDlg <- function(x, ...){
     
     cabbr <- function(x){
       
-      if(class(x)[1]=="integer") "int"
-      else if(class(x)[1]=="numeric") "num"  
-      else if(class(x)[1]=="factor") gettextf("fac(%s)", nlevels(x))  
-      else if(class(x)[1]=="ordered") gettextf("ord(%s)", nlevels(x))  
-      else if(class(x)[1]=="Date") "date"  
-      else if(class(x)[1]=="character") "char"  
-      else if(class(x)[1]=="logical") "log"  
+      if(class(x)[1]=="integer") "i"
+      else if(class(x)[1]=="numeric") "n"  
+      else if(class(x)[1]=="factor") gettextf("f_%s", nlevels(x))  
+      else if(class(x)[1]=="ordered") gettextf("o_%s", nlevels(x))  
+      else if(class(x)[1]=="Date") "d"  
+      else if(class(x)[1]=="character") "c"  
+      else if(class(x)[1]=="logical") "l"  
       else class(x)[1]   
     }
     
@@ -280,7 +283,8 @@ ModelDlg <- function(x, ...){
   fam <- "comic"
   size <- 10
   myfont <- tcltk::tkfont.create(family = fam, size = size)
-
+  mySerfont <- tcltk::tkfont.create(family = "Times", size = size)
+  
   tfmodx <- tcltk::tclVar("")
   tflhs <- tcltk::tclVar("")
   tffilter <- tcltk::tclVar("")
@@ -393,13 +397,22 @@ ModelDlg <- function(x, ...){
   tfButPoly <- tcltk::tkbutton(frmButtons, text = "x\U00B2",
                                command = .BtnAddPoly,
                                height = 1, width = 2, font=myfont)
-
+  tfButMin <- tcltk::tkbutton(frmButtons, text = "-",
+                              command = .BtnAddMin, height = 1, width = 2, font=myfont)
+#  tfButPipe <- tcltk::tkbutton(frmButtons, text = "|",
+#                              command = .BtnAddPipe, height = 1, width = 2, font=myfont)
+  tfButI <- tcltk::tkbutton(frmButtons, text="I",
+                               command = .BtnAddI, height = 1, width = 2, font=mySerfont)
+  
   tcltk::tkgrid(tfButLHS, row = 0, rowspan=10, padx = 5, sticky = "s")
   tcltk::tkgrid(tcltk::tklabel(frmButtons, text="\n\n"))
   tcltk::tkgrid(tfButAdd, row = 40, padx = 5, sticky = "s")
-  tcltk::tkgrid(tfButMult, row = 50, padx = 5, sticky = "s")
-  tcltk::tkgrid(tfButInt, row = 60, padx = 5, sticky = "s")
-  tcltk::tkgrid(tfButPoly, row = 70, padx = 5, sticky = "s")
+  tcltk::tkgrid(tfButMin, row = 50, padx = 5, sticky = "s")
+  tcltk::tkgrid(tfButMult, row = 60, padx = 5, sticky = "s")
+  tcltk::tkgrid(tfButInt, row = 70, padx = 5, sticky = "s")
+  # tcltk::tkgrid(tfButPipe, row = 80, padx = 5, sticky = "s")
+  tcltk::tkgrid(tfButPoly, row = 80, padx = 5, sticky = "s")
+  tcltk::tkgrid(tfButI, row = 90, padx = 5, sticky = "s")
 
 
   # Model textbox
@@ -562,8 +575,6 @@ dir.choose <- function(default = "", caption = "Select directory"){
   requireNamespace("tcltk", quietly = FALSE)
   tcltk::tk_choose.dir(default = default, caption = caption)
 }
-
-
 
 
 

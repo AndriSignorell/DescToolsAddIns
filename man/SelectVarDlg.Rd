@@ -40,7 +40,29 @@ When x is a \code{data.frame} the columnnames are listed,
 when x is a factor the according levels are listed and in all other cases the list is filled with the unique elements of x.
 %%  ~~ If necessary, more details than the description above ~~
 
+\code{SelectVarDlg()} checks for an option \code{"selkey"} for defining the selection keywords, defined as a list of this structure:
+
+
+
+  \tabular{ll}{
+    {\code{file}} \tab the keywords to be interpreted as a filename, defaults to \code{c("fn","file","filename")} \cr
+    {\code{dir}} \tab the keywords to be interpreted as a directory name, defaults to \code{c("path","dir")}\cr
+    {\code{col}} \tab the keywords to be interpreted as a color, defaults to \code{c("col","color")}\cr
+    {\code{pch}}\tab the keywords to be interpreted as a point character, defaults to \code{c("pch")}
+  } 
+
+
+It can be set with 
+\preformatted{
+  options(selkey = list(file=c("fn","file","filename"),
+                        dir=c("path","dir", "dirname"),
+                        col=c("color", "col"),
+                        pch=c("pch"))
+  )              
 }
+
+}
+
 \value{
 A comma separated list with the selected values enquoted is returned invisibly as well as
 written to clipboard for easy inserting the text in an editor afterwards.

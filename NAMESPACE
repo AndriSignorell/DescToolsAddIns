@@ -1,9 +1,9 @@
 
 export("Str", "Desc", "Select", "Plot", "PlotD", "Head", "BuildModel", "Edit", "NewObject",
-       "FileSaveAs" , "XLView","IntView", "FileOpen", "FileBrowserOpen", "FlipBackSlash", "FlipSlash","Example", "PlotPar", "PlotPch", "PlotMar",
+       "FileSaveAs" , "XLView","IntView", "FileOpen", "FileBrowserOpen", "FlipBackSlash", "Example", "PlotPar", "PlotPch", "PlotMar",
        "Info","FileOpenDlg", "Xplore", "dir.choose", "ColorDlg", "SelectVarDlg", "FileImportDlg", "ColPicker",
-       "SetArrow", "Enquote", "EnquoteS", "EvalEnquote", "InspectPnt", "Unclass","GetExcelRange","FlushToSource", "RemoveDuplicates",
-       "SortAsc", "SortDesc", "CreateBookmark")
+       "SetArrow", "Enquote", "EnquoteS", "EvalEnquote", "InspectPnt", "Unclass","GetExcelRange", "GetExcelRangeH","FlushToSource", "RemoveDuplicates",
+       "SortAsc", "SortDesc", "Shuffle", "CreateBookmark", "Str1")
 
 importFrom("DescTools", "Desc", "Str", "Abstract", "Some", "Arrow", "Pal",
            "StrTrim", "Format", "Label", "StrExtract", "StrTrunc", "IsNumeric", "SplitPath",
