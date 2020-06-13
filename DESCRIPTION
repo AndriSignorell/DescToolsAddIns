@@ -1,7 +1,7 @@
 Package: DescToolsAddIns
 Type: Package
 Title: Interactive Functions to be Used as Shortcuts in 'RStudio'
-Version: 1.8
+Version: 1.7.0001
 Date: 2020-06-08
 Author: Andri Signorell
 Maintainer: Andri Signorell <andri@signorell.net>

@@ -19,7 +19,6 @@
 \alias{Enquote}
 \alias{EnquoteS}
 \alias{EvalEnquote}
-\alias{BuildModel}
 \alias{Edit}
 \alias{NewObject}
 \alias{InspectPnt}
@@ -49,7 +48,7 @@ This package includes add-ins for some of the most frequently used functions
 in a data scientist's (at least mine) daily work (like \code{str()}, \code{example()}, \code{plot()}, \code{head()}, \code{view()}, \code{Desc()}).\cr
 Most of these functions use the current selection in RStudios source panel and send the specific command to the console
 where it is executed immediately.
-Assigning shortcuts to these add-ins saves you quite a few keystrokes and brings a breeze of GUI-interaction into your life.
+Assigning shortcuts to these add-ins saves you tons of keystrokes and brings a breeze of liberating and brake-releasing GUI-interaction into your R-life.
 }
 \usage{
 NewObject()
@@ -137,7 +136,7 @@ The following add-ins are available:
     
     \item \code{EvalEnquote}:  \cr evaluates the selection before enquoting the parts and paste them separated by comma. This can be used to enquote factors.
     
-    \item \code{FlipBackSlash}: \cr Handling backslashes in pathnames can be really annoying on Windows. This function replaces all backslashes in the selected text by simple slashes. The option \code{ReplaceDoubleSlash} controls whether double slashes should be replaced by simple ones.\cr It's cool to set this command to the keyboard shortcut: \code{Ctrl+Shift+/}
+    \item \code{FlipBackSlash}: \cr Handling backslashes in pathnames can be really annoying on Windows. This function replaces all backslashes in the selected text by simple slashes. In the first step all backlashes are replaced by slashes, in further applications of the function, flipflops are performed between slashes and backslashes. The option \code{ReplaceDoubleSlash} controls whether double slashes should be replaced by simple ones.\cr It's cool to set this command to the keyboard shortcut: \code{Ctrl+Shift+/}
   }
 
 As soon as the package is loaded once, the AddIns will be listed in RStudios AddIns listbox:\cr\cr

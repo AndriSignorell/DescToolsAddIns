@@ -4,10 +4,12 @@ DescToolsAddIns 1.8 (2020-06-08)
 ---------------------------------
 
 NEW FUNCTIONS ADDED:
-   * 
+   * SelectBookmark() and DeleteBookmark() to select and delete bookmarks
+     in a Word document have been added.
 
 UPDATED FUNCTIONS:
-   * 
+   * minus operator in ModelDlg() will insert . - at the beginning of the text 
+     as long as the text field is empty.
 
 DEPRECATED:
    * 

@@ -88,6 +88,26 @@ Description: Takes the current selection and creates a bookmark with it as name.
 Binding: CreateBookmark
 Interactive: false
 
+Name: DeleteBookmark
+Title:  Delete a Bookmark in Word
+Description: Takes the current selection and deletes a bookmark with it as name.
+Binding: DeleteBookmark
+Interactive: false
+
+Name: SelectBookmark
+Title:  Select the Range of a Bookmark in Word
+Description: Takes the current selection and selects the bookmark range.
+Binding: SelectBookmark
+Interactive: false
+
+
+
+Name: RecreateBookmarkChunk
+Title: Create a Bookmark and execute Code Chunk in Word 
+Description: Create a Bookmark in Word and executes the code based on the currently selected code chunk
+Binding: RecreateBookmarkChunk
+Interactive: false
+
 
 
 Name: IntView

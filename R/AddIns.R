@@ -824,6 +824,56 @@ CreateBookmark <- function(){
 
 
 
+.ParseBookmark <- function(sel){
+
+  # expected structure of the code (args are optional)
+  # ## Bookmark: <bookmarkname> (<args>) { <code> }
+  # the bookmarkname must consist of bm(p|t)000000000, p standing for plot, t for text
+  # the type of the bookmark must be visible in the name, as 
+  # updatebookmark gets nothing else...
+  
+  # first separate the bookmark name between : and { of the selected text
+  bm <- StrTrim(regmatches(sel, gregexpr("(?s)(?<=:).*?(?=\\{)", sel, perl=TRUE)))
+  
+  # split name from args and get the bookmark type
+  # greedy to the last )
+  args <- regmatches(bm, gregexpr("(?<=\\().*(?=\\))", bm, perl=TRUE))[[1]]
+  if(length(args) > 0) args <- paste(",", args) else args <- ""
+  
+  bm <- gsub(" .*", "", bm)   # take first word only as name
+  bmtype <- substr(bm, 1, 3)
+  
+  # get the commands between the brackets
+  code <- regmatches(sel, gregexpr("(?s)(?<=\\{).*(?=\\})", sel, perl=TRUE))[[1]]
+  
+  return(list(name=bm, type=bmtype, args=args, code=code))  
+  
+}
+
+
+.UpdateBookmark <- function(bm, wrd=DescTools::DescToolsOptions("lastWord")){
+
+  with(bm, {
+    
+    DescTools::WrdGoto(name = name)
+    wrd[["Selection"]]$delete()
+    
+    if(type=="bmt") {         # text bookmark
+      eval(parse(text=gettextf('DescTools::ToWrdB({%s}, bookmark="%s" %s)', code, name, args)))
+      
+    } else if(type=="bmp") {  # plot bookmark
+      eval(parse(text=gettextf("DescTools::ToWrdPlot(%s, bookmark='%s' %s)", sQuote(gettextf("{%s}", code)), name, args)))
+      
+    } else {
+      warning(gettextf("unknown bookmark type %s", type)) # warning("unknown bookmark type")
+    }
+  }) 
+  
+  invisible()
+  
+}
+
+
 UpdateBookmark <- function(){
   
   requireNamespace("DescTools")
@@ -832,48 +882,16 @@ UpdateBookmark <- function(){
   
   if(sel != "") {
     
-    # expected structure of the code (args are optional)
-    # ## Bookmark: <bookmarkname> (<args>) { <code> }
-    # the bookmarkname must consist of bm(p|t)000000000, p standing for plot, t for text
-    # the type of the bookmark must be visible in the name, as 
-    # updatebookmark gets nothing else...
+    bm <- .ParseBookmark(sel)
     
-    # first separate the bookmark name between : and { of the selected text
-    bm <- StrTrim(regmatches(sel, gregexpr("(?s)(?<=:).*?(?=\\{)", sel, perl=TRUE)))
-    
-    # split name from args and get the bookmark type
-    # greedy to the last )
-    args <- regmatches(bm, gregexpr("(?<=\\().*(?=\\))", bm, perl=TRUE))[[1]]
-    if(length(args) > 0) args <- paste(",", args) else args <- ""
-    
-    bm <- gsub(" .*", "", bm)   # take first word only as name
-    bmtype <- substr(bm, 1, 3)
-    
-    # get the commands between the brackets
-    code <- regmatches(sel, gregexpr("(?s)(?<=\\{).*(?=\\})", sel, perl=TRUE))[[1]]
-    
-    if(!is.null(DescTools::WrdBookmark(bookmark = bm))){
-      
-      DescTools::WrdGoto(name = bm)
-      wrd <- DescTools::DescToolsOptions("lastWord")
-      wrd[["Selection"]]$delete()
-      
-      if(bmtype=="bmt") {         # text bookmark
-        eval(parse(text=gettextf('DescTools::ToWrdB({%s}, bookmark="%s" %s)', code, bm, args)))
-        
-      } else if(bmtype=="bmp") {  # plot bookmark
-        eval(parse(text=gettextf("DescTools::ToWrdPlot(%s, bookmark='%s' %s)", sQuote(gettextf("{%s}", code)), bm, args)))
-        
+    with(bm,    
+      if(!is.null(DescTools::WrdBookmark(name = name))){
+        .UpdateBookmark(bm)
+
       } else {
-        warning("unknown bookmark type")
+        warning(gettextf("bookmark %s not found", name))
       }
-      
-    } else {
-      warning(gettextf("bookmark %s not found", bm))
-      
-    }
-    
-    
+    )    
     
   } else {
     cat("No selection!\n")
@@ -882,6 +900,59 @@ UpdateBookmark <- function(){
 }
 
 
+SelectBookmark <- function() {
+  
+  requireNamespace("DescTools")
+  
+  sel <- getActiveDocumentContext()$selection[[1]]$text
+  if(sel != "") {
+    if(sel=="\n") sel <- "'\n'"
+    rstudioapi::sendToConsole(gettextf("DescTools::WrdGoto(name='%s')", sel), 
+                              focus = FALSE)
+  } else {
+    cat("No selection!\n")
+  }
+  
+}
+
+
+DeleteBookmark <- function() {
+  requireNamespace("DescTools")
+  
+  sel <- getActiveDocumentContext()$selection[[1]]$text
+  if(sel != "") {
+    if(sel=="\n") sel <- "'\n'"
+    rstudioapi::sendToConsole(gettextf("DescTools::WrdDeleteBookmark(name='%s')", sel), focus = FALSE)
+  } else {
+    cat("No selection!\n")
+  }
+  
+}
+
+
+
+
+RecreateBookmarkChunk <- function(){
+  
+  requireNamespace("DescTools")
+  
+  sel <- getActiveDocumentContext()$selection[[1]]$text
+  
+  if(sel != "") {
+    
+    bm <- .ParseBookmark(sel)
+    
+    # create new bookmark with the name in bm
+    if(sel=="\n") sel <- "'\n'"
+    rstudioapi::sendToConsole(gettextf("DescTools::WrdInsertBookmark(name='%s')", sel), focus = FALSE)
+    
+    .UpdateBookmark(bm)
+    
+    } else {
+    cat("No selection!\n")
+  }
+  
+}
 
 
 # ToDo:

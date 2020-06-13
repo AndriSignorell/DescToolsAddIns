@@ -1,5 +1,6 @@
 \name{ModelDlg}
 \alias{ModelDlg}
+\alias{BuildModel}
 
 \title{Compose Model Formula}
 

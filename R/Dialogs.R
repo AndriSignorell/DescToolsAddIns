@@ -157,9 +157,11 @@ ModelDlg <- function(x, ...){
       else
         vn <- DescTools::StrTrim(gettextf(pack, lst[var.name + 1]))
 
-      tcltk::tkinsert(tfModx, "insert",
-                      StrTrim(paste(ifelse(txt=="", "", connect), paste(vn, collapse=sep), ""), method="left")
-                      , "notwrapped")
+      txt <- StrTrim(paste(ifelse(txt=="", "", connect), paste(vn, collapse=sep), ""), method="left")
+      if(connect == "-" & .GetModTxt() == "\n")
+        txt <- paste(" . - ", txt)
+      
+      tcltk::tkinsert(tfModx, "insert", txt, "notwrapped")
     }
   }
 
