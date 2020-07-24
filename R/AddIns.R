@@ -100,7 +100,8 @@ Select <- function(){
   selkey <- getOption("selkey", default=list(file=c("fn","file","filename"),
                                              dir=c("path","dir", "pathname"),
                                              col=c("color", "col"),
-                                             pch=c("pch"), locate=c("loc","xy")))
+                                             pch=c("pch"), locate=c("loc","xy"), 
+                                             bookmark=c("wbm", "bmt")))
   
   sel <- getActiveDocumentContext()$selection[[1]]$text
   if(sel != "") {
@@ -131,6 +132,9 @@ Select <- function(){
         .InsertSelectedText(txt)
       }
       
+    } else if(sel %in% selkey$bookmark) {
+      eval(parse(text="SelectDlgBookmark()"))
+
     } else {
       if(sel != ""){
         txt <- eval(parse(text=gettextf("SelectVarDlg(%s)", sel)))

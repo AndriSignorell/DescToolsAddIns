@@ -11,7 +11,7 @@ importFrom("DescTools", "Desc", "Str", "Abstract", "Some", "Arrow", "Pal",
            "WrdDeleteBookmark")
 
 importFrom("rstudioapi", "insertText","getActiveDocumentContext", "sendToConsole", "modifyRange")
-importFrom("tcltk", "tkgetSaveFile", "tclvalue")
+importFrom("tcltk", "tkgetSaveFile", "tclvalue","ttkcombobox")
 importFrom("utils", "fix","edit", "capture.output", "object.size", "select.list")
 importFrom("writexl", "write_xlsx")
 importFrom("manipulate", "manipulate", "picker","button","checkbox","slider")
