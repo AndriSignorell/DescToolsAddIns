@@ -429,10 +429,16 @@ ModelDlg <- function(x, ...){
                               fg = "black", padx = 10, pady = 10, font = myfont)
 
   # get the model list from the options
-  models <- getOption("DTAmodels")
+  models <- getOption("DTAmodels", default = options(DTAmodels = list(
+                "linear regression (OLS)" = "r.lm <- lm(%s)"
+                ,"logistic regression" = 'r.logit <- glm(%s, fitfn="binomial")'
+                 )))
+            
+  
+  
   tfComboModel <- ttkcombobox(frmModel,
                               values = if(!is.null(models)) names(models) else "",
-                              textvariable = tfmodtype,
+                              textvariable = tfmodtype,  # font = myfont, 
                               state = "normal",     # or "readonly"
                               justify = "left", width=30)
   
@@ -674,12 +680,15 @@ SelectVarDlg.data.frame <- function(x, ...) {
 
 SelectDlgBookmark <- function(x, ...){
   
+  # should we use GetCurrWrd() here??
+  wrd <- DescTools::DescToolsOptions("lastWord")
+  
   wbms <- wrd[["ActiveDocument"]][["Bookmarks"]]
   if (wbms$count() > 0) {
     bmnames <- sapply(seq(wbms$count()), function(i) wbms[[i]]$name())
   }
   
-  sel <- DescToolsAddIns:::SelectVarDlg.default(x = bmnames, ...)
+  sel <- SelectVarDlg.default(x = bmnames, ...)
   
   # sel comes as c("bm1")
   WrdGoto(name = eval(parse(text = sel))[1])

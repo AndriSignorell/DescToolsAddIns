@@ -1,6 +1,6 @@
 
 
-DescToolsAddIns 1.8 (2020-06-08)
+DescToolsAddIns 1.8 (2020-09-10)
 ---------------------------------
 
 NEW FUNCTIONS ADDED:
@@ -10,9 +10,7 @@ NEW FUNCTIONS ADDED:
 UPDATED FUNCTIONS:
    * minus operator in ModelDlg() will insert . - at the beginning of the text 
      as long as the text field is empty.
-
-DEPRECATED:
-   * 
+   * ModelDlg() gets a combobox for models to choose.  
 
 
 
