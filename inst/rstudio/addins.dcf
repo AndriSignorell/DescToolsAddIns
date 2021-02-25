@@ -109,6 +109,13 @@ Binding: RecreateBookmarkChunk
 Interactive: false
 
 
+Name: BookmarkDlg
+Title: Bookmark Dialog
+Description: Display a dialog containing the bookmarks of the current Word document.
+Binding: BookmarkDlg
+Interactive: true
+
+
 
 Name: IntView
 Title: View selected object with internal viewer
