@@ -1,14 +1,13 @@
 
 
-DescToolsAddIns 1.9 (2021-02-10)
+DescToolsAddIns 1.9 (2021-03-19)
 ---------------------------------
 
 NEW FUNCTIONS ADDED:
    * BookmarkDlg() displays a dialog containing the bookmarks of the
-     current Word document.
-
-UPDATED FUNCTIONS:
-   * 
+     current Word document. It provides buttons to select and delete 
+     the bookmarks.
+   * Cat() will output the selection with cat(..., sep="\n")  
 
 BUGFIXES:
    * RecreateBookmarkChunk() now correctly parses the bookmark name.

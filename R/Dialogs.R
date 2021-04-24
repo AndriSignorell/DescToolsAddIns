@@ -1274,8 +1274,8 @@ BookmarkDlg <- function(){
           
           d.bm <- d.bm[d.bm$name != vn, ]
           
-          tclvalue(tbm_name) <- d.bm$name
-          tclvalue(tbm_type) <- d.bm$type
+          tcltk::tclvalue(tbm_name) <- d.bm$name
+          tcltk::tclvalue(tbm_type) <- d.bm$type
           
           .PopulateListBox(d.bm$name)
           
@@ -1325,7 +1325,7 @@ BookmarkDlg <- function(){
     } else if(ord == "d"){
       v <- DescTools::StrTrim(sort(lst, decreasing = TRUE))
     } else {
-      v <- DescTools::StrTrim(.VarNames()[strsplit(tclvalue(tbm_name), split=" ")[[1]] %in% .GetVarName(lst)])
+      v <- DescTools::StrTrim(.VarNames()[strsplit(tcltk::tclvalue(tbm_name), split=" ")[[1]] %in% .GetVarName(lst)])
     }
     
     .PopulateListBox(v)
@@ -1370,8 +1370,8 @@ BookmarkDlg <- function(){
   .VarNames <- function(){
     
     # gettextf("%s (%s)", d.bm$name, d.bm$type)
-    gettextf("%s (%s)", strsplit(tclvalue(tbm_name), split = " ")[[1]], 
-             strsplit(tclvalue(tbm_type), split = " ")[[1]])
+    gettextf("%s (%s)", strsplit(tcltk::tclvalue(tbm_name), split = " ")[[1]], 
+             strsplit(tcltk::tclvalue(tbm_type), split = " ")[[1]])
   }
   
   .GetVarName <- function(x){

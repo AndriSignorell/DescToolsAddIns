@@ -33,6 +33,7 @@
 \alias{SortDesc}
 \alias{Shuffle}
 \alias{RemoveDuplicates}
+\alias{Cat}
 
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{Some Functions to be Used as Shortcuts in 'RStudio'
@@ -67,6 +68,7 @@ Abstract()
 Head()
 Some()
 Summary()
+Cat()
 Desc()
 Example()
 Info()
@@ -114,6 +116,7 @@ The following add-ins are available:
     \item \code{Head}:  \cr run R-command \code{\link{head}()} on the current selection
     \item \code{Some}:  \cr run DescTools command \code{\link[DescTools]{Some}()} on the current selection
     \item \code{Summary}:  \cr run R-command \code{\link{summary}()} on the current selection
+    \item \code{Cat}:  \cr run R-command \code{\link{cat}(..., sep="\n")} on the current selection
     \item \code{Desc}:  \cr run DescTools command \code{\link[DescTools]{Desc}()} on the current selection
     \item \code{Example}:  \cr run R-command \code{example()} on the current selection
     \item \code{Info}: \cr print object properties of the currently selected object

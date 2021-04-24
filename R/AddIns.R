@@ -60,6 +60,17 @@ Summary <- function(){
 }
 
 
+Cat <- function(){
+  sel <- getActiveDocumentContext()$selection[[1]]$text
+  if(sel != "") {
+    rstudioapi::sendToConsole(gettextf("cat(%s, sep='\n')", sel), focus = FALSE)
+  } else {
+    cat("No selection!\n")
+  }
+}
+
+
+
 Edit <- function(){
   sel <- getActiveDocumentContext()$selection[[1]]$text
   if(sel != "") {
