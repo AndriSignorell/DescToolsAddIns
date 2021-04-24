@@ -181,6 +181,12 @@ Description: Run R command summary() on the current selection
 Binding: Summary
 Interactive: false
 
+Name: Cat
+Title: Run cat() on the current selection
+Description: Run R command cat(..., sep="\n") on the current selection
+Binding: Cat
+Interactive: false
+
 Name: Desc
 Title: Run Desc() on the current selection
 Description: Run Desc() on the current selection

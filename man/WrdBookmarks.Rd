@@ -9,6 +9,7 @@
 \alias{WrdBookmarks}
 \alias{RenameBookmark}
 
+
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{Operating MS Word
 %%  ~~function to do ... ~~
@@ -30,7 +31,6 @@ DeleteBookmark()
 RenameBookmark(name, newname, wrd = DescToolsOptions("lastWord"))
 
 RecreateBookmarkChunk()
-
 }
 
 \arguments{
@@ -59,7 +59,7 @@ RecreateBookmarkChunk()
 
 \code{RecreateBookmarkChunk()} recreates the selected chunks in RStudio by inserting a bookmark if not existing and updating it with the result. 
 
-With the \code{BookmarkDlg()} there's an interactive support for handling bookmarks. Found bookmarks are presented in a sortable and filterable listbos. Selecting, deleting and renaming the selected bookmark is supported. 
+With the \code{BookmarkDlg()} there's an interactive support for handling bookmarks. Found bookmarks are presented in a sortable and filterable listbox. Selecting, deleting and renaming (not yet implemented) the selected bookmark is supported. 
 
 \figure{BookmarkDlg.png}{ Bookmark dialog}
 
