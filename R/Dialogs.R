@@ -682,6 +682,22 @@ SelectVarDlg.factor <- function(x, ...) {
 }
 
 
+SelectVarDlg.character <- function(x, ...) {
+  
+  sel <- SelectVarDlg.default( x = unique(x), ...)
+  if(sel!="")
+    txt <- paste(deparse(substitute(x)), " %in% ",
+                 sel, sep="", collapse="")
+  else
+    txt <- ""
+  
+  .ToClipboard(txt)
+  
+  invisible(txt)
+}
+
+
+
 SelectVarDlg.data.frame <- function(x, ...) {
 
   sel <- SelectVarDlg.default( x = colnames(x), ...)
