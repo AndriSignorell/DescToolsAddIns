@@ -4,7 +4,7 @@ DescToolsAddIns 1.10 (2021-06-19) ***
 ---------------------------------
 
 NEW FUNCTIONS ADDED:
-   * 
+   * Insertfunction for %in% and |>  has been added.
 
 UPDATED FUNCTIONS:
    * SelectVarDlg gets an interface for characters.

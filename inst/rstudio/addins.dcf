@@ -307,5 +307,13 @@ Binding: FlipBackSlash
 Interactive: true
 
 
+Name: Insert %in%
+Description: Inserts `%in%` at the cursor position.
+Binding: InsertIn
+Interactive: false
 
 
+Name: Insert |>
+Description: Inserts the base R pipe `|>` at the cursor position.
+Binding: InsertBasePipe
+Interactive: false

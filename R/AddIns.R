@@ -800,6 +800,11 @@ FlushToSource <- function(){
 }
 
 
+InsertIn <- function(){
+  rstudioapi::insertText(" %in% ")
+}
 
-
+InsertBasePipe <- function(){
+  rstudioapi::insertText(" |> ")
+}
 
