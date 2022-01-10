@@ -25,6 +25,7 @@
 \alias{Unclass}
 \alias{GetExcelRange}
 \alias{GetExcelRangeH}
+\alias{GetExcelTable}
 \alias{Class}
 \alias{Info}
 \alias{FlushToSource}
@@ -55,6 +56,7 @@ FileImport()
 FileSaveAs()
 GetExcelRange(env = .GlobalEnv, header = FALSE)
 GetExcelRangeH(env = .GlobalEnv)
+GetExcelTable(env = .GlobalEnv)
 XLView()
 IntView()
 
@@ -104,6 +106,8 @@ The following add-ins are available:
     \item \code{FileSaveAs}:  \cr display a file dialog, get the desired path and filename and save the selected object in the given place.
         Several file types are supported csv/xlsx for data.frames, text/binary for other objects.
     \item \code{GetXLRange}:  \cr run DescTools command \code{\link[DescTools]{XLGetRange}()} by taking the current selection as name for the imported data and replace the current selection by the used code.
+
+    \item \code{GetXLTable}:  \cr run DescTools command \code{\link[DescTools]{XLGetTable}()} by taking the current 3-fold selection as data matrix, rownames and columnnames and replace the current selection by the structure code.
 
     \item \code{XLView}:  \cr view selected object in MS-Excel, which makes sense for data.frames.
     \item \code{IntView}:  \cr view selected object with internal viewer (here again: only data.frames)

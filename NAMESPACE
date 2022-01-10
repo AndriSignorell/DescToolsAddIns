@@ -30,3 +30,6 @@ S3method(SelectVarDlg, numeric)
 S3method(SelectVarDlg, character)
 
 
+
+
+

@@ -46,6 +46,12 @@ Description: Import a selected range in a running Excel instance, using a header
 Binding: GetExcelRangeH
 Interactive: true
 
+Name: GetExcelTable
+Title: Import Excel Table
+Description: Import a 3-fold selection in a running Excel instance, interpreting it as data matrix (1st) with row- (2nd) and columnnames (3d)
+Binding: GetExcelTable
+Interactive: true
+
 
 Name: XLView
 Title: View selected object in XL
@@ -288,7 +294,7 @@ Interactive: true
 
 Name: RemoveDuplicates
 Title: Remove Duplicates
-Description: Remove rowwise all duplicates in the currently selected text
+Description: Remove linewise all duplicates in the currently selected text
 Binding: RemoveDuplicates
 Interactive: true
 
@@ -317,3 +323,11 @@ Name: Insert |>
 Description: Inserts the base R pipe `|>` at the cursor position.
 Binding: InsertBasePipe
 Interactive: false
+
+
+Name: SavePlot
+Description: Looks for plot code in comments and executes it.
+Binding: SavePlot
+Interactive: true
+
+

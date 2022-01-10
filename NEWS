@@ -5,6 +5,7 @@ DescToolsAddIns 1.10 (2021-06-19) ***
 
 NEW FUNCTIONS ADDED:
    * Insertfunction for %in% and |>  has been added.
+   * GetExcelTable() imports a table structure from XL.
 
 UPDATED FUNCTIONS:
    * SelectVarDlg gets an interface for characters.

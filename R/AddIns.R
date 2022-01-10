@@ -754,7 +754,7 @@ InspectPnt <- function(){
 
 
 
-GetExcelRange <- function(env=.GlobalEnv, header=FALSE){
+GetExcelRange <- function(env=.GlobalEnv, header=FALSE, echo=TRUE){
 
   requireNamespace("DescTools")
   
@@ -774,7 +774,7 @@ GetExcelRange <- function(env=.GlobalEnv, header=FALSE){
   txt <- paste(txt, attr(rng, "call"), "\n")
   rstudioapi::modifyRange(txt)
 
-  print(rng)
+  if(echo) print(rng)
 
 }
 
@@ -782,6 +782,37 @@ GetExcelRange <- function(env=.GlobalEnv, header=FALSE){
 
 GetExcelRangeH <- function(env=.GlobalEnv){
   GetExcelRange(header=TRUE)
+}
+
+
+
+GetExcelTable <- function(env=.GlobalEnv){
+  
+  # get a matrix data with rownames and columnnames as 3 sequentially 
+  
+  # selected ranges
+  # we need to declare the variable here to avoid the barking of the check
+  rng <- data.frame()   
+  eval(parse(text="rng <- DescTools::XLGetRange(header=FALSE)"))
+  
+  txt <- getActiveDocumentContext()$selection[[1]]$text
+  if(txt != "") {
+    # remove any assignment
+    txt <- StrTrim(gsub("<- *$|= *$", "", txt))
+    # assign the imported data to the selected name in GlobalEnv
+    assign(txt, rng, envir = env)
+    # add the assignment to the selected name
+    txt <- paste(txt, "<-")
+  }
+  
+  txt <- gettextf("%s as.table(matrix(c(%s), nrow=%s, \r  dimnames=list(c(%s),  c(%s))))",
+                  txt, toString(as.matrix(rng[[1]])), nrow(rng[[1]]),
+                  toString(dQuote(rng[[2]][,1])), toString(dQuote(rng[[3]][1,])))
+  
+  rstudioapi::modifyRange(txt)
+  rstudioapi::sendToConsole(txt, focus = FALSE)
+  invisible(m)
+  
 }
 
 
@@ -807,4 +838,68 @@ InsertIn <- function(){
 InsertBasePipe <- function(){
   rstudioapi::insertText(" |> ")
 }
+
+
+
+
+
+SavePlot <- function(){
+  
+  requireNamespace("DescTools")
+  
+  sel <- getActiveDocumentContext()$selection[[1]]$text
+  
+  if(sel != "") {
+    
+    # look for something like 'SavePlot' in the stringpart before the first :
+    ok <- grepl("SavePlot", strsplit(sel, ":")[[1]][1], ignore.case = TRUE)
+    
+    if(ok) {
+      
+      opendevcmd <- StrTrim(regmatches(sel, gregexpr("(?s)(?<=:).*?(?=\\{)", sel, perl=TRUE)))
+      # remove comments
+      opendevcmd <- paste(gsub("^#", "", strsplit(opendevcmd, split="\n")[[1]]), collapse=" ")
+      # open device according to the given code 
+      eval(parse(text = opendevcmd))
+      
+      # extract R code between brackets {}
+      code <- regmatches(sel, gregexpr("(?s)(?<=\\{).*(?=\\})", sel, perl=TRUE))[[1]]
+      # run code
+      eval(parse(text = code))
+      
+      # close the device
+      dev.off()
+      
+    }
+
+    
+  } else {
+    cat("No selection!\n")
+  }
+  
+}
+
+
+
+
+
+
+# gsub("^[^:]*:", "", sel)
+# 
+# sel <- '
+# # SavePlot:
+# # png(filename = "C:/Users/andri/Documents/HWZ/21-22/AnStat/FLK/Armlänge.png",
+# #     width=600, height=400, pointsize = 16)
+# {
+# 
+#   data(cats, package="MASS")
+#   cols <- SetNames(c(hred, hblue), names=c("F", "M"))
+#   plot(Hwt ~ Bwt, cats, pch=16, col=hblue,
+#        xlab="rechter Arm [cm]", ylab="linker Arm [cm]",
+#        main="", panel.first=quote(grid()), las=1)
+# 
+#   lines(lm(Hwt ~ Bwt, data=frm), col=cols[x])
+# 
+# }
+# '
 
