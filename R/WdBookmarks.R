@@ -25,6 +25,7 @@ SelectDlgBookmark <- function(x, ...){
 ToWrdWithBookmark <- function(){
   
   requireNamespace("DescTools")
+  opt <- options(useFancyQuotes = FALSE); on.exit(options(opt))
   
   sel <- getActiveDocumentContext()$selection[[1]]$text
   if(sel != "") {
@@ -41,6 +42,7 @@ ToWrdWithBookmark <- function(){
 ToWrdPlotWithBookmark <- function(){
   
   requireNamespace("DescTools")
+  opt <- options(useFancyQuotes = FALSE); on.exit(options(opt))
   
   sel <- getActiveDocumentContext()$selection[[1]]$text
   if(sel != "") {
@@ -203,6 +205,7 @@ RenameBookmark <- function(name, newname, wrd = DescToolsOptions("lastWord")) {
 RecreateBookmarkChunk <- function(){
   
   requireNamespace("DescTools")
+  opt <- options(useFancyQuotes = FALSE); on.exit(options(opt))
   
   sel <- getActiveDocumentContext()$selection[[1]]$text
   

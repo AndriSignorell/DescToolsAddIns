@@ -11,7 +11,9 @@ UPDATED FUNCTIONS:
    * SelectVarDlg gets an interface for characters.
    
 BUGFIXES:
-   * 
+   * options(useFancyQuotes=TRUE) x turned out to be problematic 
+     when transferring objects to Word and is now switched off.
+
 
 
 
