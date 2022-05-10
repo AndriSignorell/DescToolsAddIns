@@ -323,7 +323,7 @@ ModelDlg <- function(x, ...){
   xname <- paste(StrTrim(deparse(substitute(x))), collapse=" ")
 
   if (!missing(x)) {
-    if(class(x) == "formula") {
+    if(inherits(x, "formula")) {
 
       # would be nice to pick up a formula here, to be able to edit the formula
       # https://rviews.rstudio.com/2017/02/01/the-r-formula-method-the-good-parts/

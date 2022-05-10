@@ -811,8 +811,7 @@ GetExcelTable <- function(env=.GlobalEnv){
   
   rstudioapi::modifyRange(txt)
   rstudioapi::sendToConsole(txt, focus = FALSE)
-  invisible(m)
-  
+
 }
 
 
@@ -888,7 +887,7 @@ SavePlot <- function(){
 # 
 # sel <- '
 # # SavePlot:
-# # png(filename = "C:/Users/andri/Documents/HWZ/21-22/AnStat/FLK/Armlänge.png",
+# # png(filename = "C:/Users/andri/Documents/HWZ/21-22/AnStat/FLK/Armlaenge.png",
 # #     width=600, height=400, pointsize = 16)
 # {
 # 
