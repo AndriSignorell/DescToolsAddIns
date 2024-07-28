@@ -491,8 +491,6 @@ FlipBackSlash <- function() {
 
 SetArrow <- function(){
 
-  requireNamespace("DescTools")
-
   xy <- eval(parse(text="locator(n = 2)"))
   eval(parse(text="Arrow(x0 = xy$x[2], y0 = xy$y[2], x1 = xy$x[1], y1 = xy$y[1], head=3)"))
   txt <- gettextf("Arrow(x0 = %s, y0 = %s, x1 = %s, y1 = %s, head = 3)\n",

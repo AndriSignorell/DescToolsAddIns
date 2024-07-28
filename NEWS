@@ -1,5 +1,14 @@
 
 
+DescToolsAddIns 1.11 (2024-07-28)
+---------------------------------
+
+NEW FUNCTIONS ADDED:
+   * The function Arrow() has been moved here from DescTools, where
+     it didn't make much sense.
+
+
+
 DescToolsAddIns 1.10 (2021-05-09)
 ---------------------------------
 

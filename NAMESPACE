@@ -4,12 +4,12 @@ export("Str", "Desc", "Select", "Plot", "PlotD", "Head", "BuildModel", "Edit", "
        "Info","FileOpenDlg", "Xplore", "dir.choose", "ColorDlg", "SelectVarDlg", "FileImportDlg", "ColPicker",
        "SetArrow", "Enquote", "EnquoteS", "EvalEnquote", "InspectPnt", "Unclass","GetExcelRange", "GetExcelRangeH","FlushToSource", "RemoveDuplicates",
        "SortAsc", "SortDesc", "Shuffle", "CreateBookmark", "DeleteBookmark","SelectBookmark","Str1", 
-       "WrdBookmarks", "RecreateBookmarkChunk", "RenameBookmark")
+       "WrdBookmarks", "RecreateBookmarkChunk", "RenameBookmark", "Arrow")
 
-importFrom("DescTools", "Desc", "Str", "Abstract", "Some", "Arrow", "Pal",
+importFrom("DescTools", "Desc", "Str", "Abstract", "Some", "Pal",
            "StrTrim", "Format", "Label", "StrExtract", "StrTrunc", "IsNumeric", "SplitPath",
            "ToWrdB", "WrdGoto", "DescToolsOptions","WrdBookmark", "WrdInsertBookmark",
-           "WrdDeleteBookmark", "StrLeft")
+           "WrdDeleteBookmark", "StrLeft", "DrawRegPolygon", "Rotate", "Asp")
 
 importFrom("rstudioapi", "insertText","getActiveDocumentContext", "sendToConsole", "modifyRange")
 importFrom("tcltk", "tkgetSaveFile", "tclvalue","ttkcombobox","tkconfigure")
@@ -20,7 +20,7 @@ importFrom("stats", "smooth")
 importFrom("grDevices", "colors", "col2rgb", "dev.cur", "dev.list", "dev.new",
            "dev.set", "rgb2hsv", "dev.off")
 importFrom("graphics", "grid", "arrows", "box", "grconvertX", "grconvertY",
-           "mtext", "par", "plot", "points", "segments", "text")
+           "mtext", "par", "plot", "points", "segments", "text", "polygon")
 importFrom("foreign", "read.spss", "read.dta")
 
 S3method(SelectVarDlg, data.frame)
