@@ -5,7 +5,7 @@ vers <- paste("R package version", meta$Version)
 
 citEntry(entry="Manual",
          title = "DescToolsAddIns: Interactive Functions to be Used as Shortcuts in 'RStudio'",
-         author = personList(c("Andri Signorell")),
+         author = c(as.person("Andri Signorell")),
          year = year,
          note = vers,
          url = "https://cran.r-project.org/package=DescToolsAddIns",
