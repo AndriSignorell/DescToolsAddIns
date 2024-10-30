@@ -36,6 +36,8 @@
 \alias{RemoveDuplicates}
 \alias{Cat}
 
+
+
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{Some Functions to be Used as Shortcuts in 'RStudio'
 %%  ~~function to do ... ~~
@@ -52,7 +54,6 @@ Assigning shortcuts to these add-ins saves you tons of keystrokes and brings a b
 NewObject()
 FileOpen()
 FileBrowserOpen()
-FileImport()
 FileSaveAs()
 GetExcelRange(env = .GlobalEnv, header = FALSE, echo = TRUE)
 GetExcelRangeH(env = .GlobalEnv)
@@ -80,8 +81,6 @@ Plot()
 PlotD()
 SetArrow()
 InspectPnt()
-
-BuildModel()
 
 Enquote()
 EnquoteS()
