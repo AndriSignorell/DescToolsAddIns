@@ -3,8 +3,11 @@ Type: Package
 Title: Interactive Functions to be Used as Shortcuts in 'RStudio'
 Version: 1.12
 Date: 2024-10-30
-Author: Andri Signorell
-Maintainer: Andri Signorell <andri@signorell.net>
+Authors@R: person(given = "Andri",
+                  family = "Signorell",
+                  role = c("aut", "cre"),
+                  email = "andri@signorell.net",
+                  comment = c(ORCID = "0000-0003-4311-1969"))
 Description: 'RStudio' as of recently offers the option to define addins and assign shortcuts to them. This package contains addins for a few most frequently used functions in a data scientist's (at least mine) daily work (like str(), example(), plot(), head(), view(), Desc()). Most of these functions will use the current selection in the editor window and send the specific command to the console while instantly executing it. Assigning shortcuts to these addins will save you quite a few keystrokes.
 Depends: base, stats, R (>= 3.5.0)
 Imports: DescTools (>= 0.99.30), rstudioapi (>= 0.1), manipulate, writexl, foreign
