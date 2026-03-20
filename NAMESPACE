@@ -22,6 +22,8 @@ importFrom("grDevices", "colors", "col2rgb", "dev.cur", "dev.list", "dev.new",
 importFrom("graphics", "grid", "arrows", "box", "grconvertX", "grconvertY",
            "mtext", "par", "plot", "points", "segments", "text", "polygon")
 importFrom("foreign", "read.spss", "read.dta")
+importFrom("tools", "file_path_sans_ext", "file_ext")
+
 
 S3method(SelectVarDlg, data.frame)
 S3method(SelectVarDlg, default)

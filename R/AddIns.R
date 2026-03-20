@@ -4,6 +4,9 @@
 # }
 
 
+# nice dialog: rstudioapi::selectFile()
+
+
 Str <- function(){
 
   requireNamespace("DescTools")
@@ -155,6 +158,8 @@ Select <- function(){
   } else {
     cat("No selection!\n")
   }
+  
+  invisible()
 
 }
 
@@ -442,38 +447,88 @@ IntView <- function(){
 
 
 
+
+
+
 FlipBackSlash <- function() {
-  
-  flip <- function(txt){
-    txt <- gsub("\\\\", "/", txt)
+
+  normalize_and_cycle <- function(x) {
     
-    if(getOption("ReplaceDoubleSlash", default = FALSE))
-      # replace double // by /
-      txt <- gsub("/+", "/", txt)
-    return(txt)
+    # Normalize mixed separators first
+    n_back <- nchar(x) - nchar(gsub("\\\\", "", x))
+    n_fwd  <- nchar(x) - nchar(gsub("/", "", x))
+    
+    if (n_back > 0 && n_fwd > 0) {
+      if (n_fwd >= n_back) {
+        x <- gsub("\\\\", "/", x)
+      } else {
+        x <- gsub("/", "\\\\", x)
+      }
+    }
+    
+    # Cycle: \\ -> /  ->  // -> \ -> \\
+    if (grepl("//", x, fixed = TRUE)) {
+      gsub("//", "\\", x, fixed = TRUE)
+    } else if (grepl("/", x, fixed = TRUE)) {
+      gsub("/", "//", x, fixed = TRUE)
+    } else if (grepl("\\\\", x, fixed = TRUE)) {
+      gsub("\\\\", "/", x, fixed = TRUE)
+    } else {
+      gsub("\\", "\\\\", x, fixed = TRUE)
+    }
   }
 
-  flop <- function(txt){
-    gsub("/", "\\\\", txt)
-  }  
-  
   rng <- getActiveDocumentContext()
   txt <- getActiveDocumentContext()$selection[[1]]$text
   
   if(txt != "") {
-    if(!grepl("\\\\", txt) & grepl("/", txt))
-      txt <- flop(txt)
-    else 
-      txt <- flip(txt)
+    txt <- normalize_and_cycle(txt)
+    len <- nchar(txt)
     
     rstudioapi::modifyRange(txt)
-    rstudioapi::setSelectionRanges(rng$selection[[1]]$range)
+    rng <- rng$selection[[1]]$range
+    rng[["end"]][2] <- rng[["start"]][2] + len
+    rstudioapi::setSelectionRanges(rng)
     
   } else {
     cat("No selection!\n")
   }
-
+  
 }
+
+
+# FlipBackSlash <- function() {
+#   
+#   flip <- function(txt){
+#     txt <- gsub("\\\\", "/", txt)
+#     
+#     if(getOption("ReplaceDoubleSlash", default = FALSE))
+#       # replace double // by /
+#       txt <- gsub("/+", "/", txt)
+#     return(txt)
+#   }
+# 
+#   flop <- function(txt){
+#     gsub("/", "\\\\", txt)
+#   }  
+#   
+#   rng <- getActiveDocumentContext()
+#   txt <- getActiveDocumentContext()$selection[[1]]$text
+#   
+#   if(txt != "") {
+#     if(!grepl("\\\\", txt) & grepl("/", txt))
+#       txt <- flop(txt)
+#     else 
+#       txt <- flip(txt)
+#     
+#     rstudioapi::modifyRange(txt)
+#     rstudioapi::setSelectionRanges(rng$selection[[1]]$range)
+#     
+#   } else {
+#     cat("No selection!\n")
+#   }
+# 
+# }
 
 
 # FlipSlash <- function() {

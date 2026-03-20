@@ -89,19 +89,16 @@
 
 FileOpenDlg <- function(fmt=NULL) {
 
-  fn <- file.choose()
+  fn <- rstudioapi::selectFile() # file.choose()
   # fn <- tcltk::tclvalue(tcltk::tkgetOpenFile())
 
   op <- options(useFancyQuotes = FALSE)
   # switch from backslash to slash
   fn <- gsub("\\\\", "/", fn)
 
-  # parse the filename into path, filename, filextension
-  fnamelong <- rev(unlist(strsplit(fn, "/")))[1]
-  ext <- rev(unlist(strsplit( fnamelong, "\\.")))[1]
-  fname <- substr(fnamelong, 1, nchar(fnamelong) - nchar(ext) - 1)
-  path <- substr(fn, 1, nchar(fn) - nchar(fname) - nchar(ext) - 1)
-
+  path <- paste0(dirname(fn), "/")
+  fname <- tools::file_path_sans_ext(basename(fn))
+  ext <- tools::file_ext(fn)
 
   if(is.null(fmt)) {
     if(ext %in% c("rda", "RData"))
@@ -701,13 +698,16 @@ SelectVarDlg.character <- function(x, ...) {
 SelectVarDlg.data.frame <- function(x, ...) {
 
   sel <- SelectVarDlg.default( x = colnames(x), ...)
-  if(sel!="")
+  
+  if(sel!="" && sel!="c()"){
     txt <- paste(deparse(substitute(x)), "[,",
                  sel, "]", sep="", collapse="")
-  else
+    
+    .ToClipboard(txt)
+    
+  } else {
     txt <- ""
-
-  .ToClipboard(txt)
+  }
 
   invisible(txt)
 }

@@ -306,6 +306,7 @@ Description: Evaluate the current selection, enquotes the parts and paste togeth
 Binding: EvalEnquote
 Interactive: true
 
+
 Name: FlipBackSlash
 Title: Replace backslashes \ by simple slashes /
 Description: Replace all backslashes in the currently selected text by simple slashes. If there are only slashes they'll be replaced by backslashes.
